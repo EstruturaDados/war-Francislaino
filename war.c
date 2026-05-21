@@ -296,21 +296,24 @@ void atacar(territorio *atacante, territorio *defensor) {
         printf("O defensor perdeu 1 tropa!\n");
 
         // Verifica se o defensor perdeu todas as tropas.
-        if (defensor->tropas <= 0) {
+      if (defensor->tropas <= 0) {
 
             printf("\nTerritorio conquistado!\n");
 
             // O território defensor muda de dono.
             strcpy(defensor->cor, atacante->cor);
 
-            // O território conquistado recebe uma tropa.
-            defensor->tropas = 1;
+            // Transfere metade das tropas
+            int tropasTransferidas = atacante->tropas / 2;
 
-            // O atacante perde uma tropa para ocupar o território.
-            atacante->tropas--;
+            defensor->tropas = tropasTransferidas;
+            atacante->tropas -= tropasTransferidas;
 
             printf("O territorio agora pertence ao exercito %s!\n",
-                   defensor->cor);
+                defensor->cor);
+
+            printf("Foram transferidas %d tropas para o territorio conquistado!\n",
+                tropasTransferidas);
         }
     }
 
